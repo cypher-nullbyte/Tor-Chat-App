@@ -28,13 +28,15 @@ with Controller.from_port() as controller:
 
     print(" * Creating our hidden service in %s" % hidden_service_dir)
 
-    result = controller.create_hidden_service(hidden_service_dir, 80, target_port=5000)
+    result = controller.create_hidden_service(hidden_service_dir, 80, target_port=5000, auth_type='basic',
+                                              client_names={'bob': None, 'alice': None})
 
     # The hostname is only available when we can read the hidden service
     # directory. This requires us to be running with the same user as tor.
 
     if result.hostname:
         print(" * Our service is available at %s, press ctrl+c to quit" % result.hostname)
+        print(result.client_auth)
     else:
         print(" * Unable to determine our service's hostname, "
               "probably due to being unable to reda the gidden service directory.")
