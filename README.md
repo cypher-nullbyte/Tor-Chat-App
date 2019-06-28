@@ -2,7 +2,28 @@
 
 # Setup
 
-## pycurl on MacOS:
+## Requirements:
+
+python3 is required in order to run this app.
+
+it is also recommended the use of pip
+
+## Installing requirements:
+
+it is recommended creating a venv:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+Install requirements:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Install pycurl on MacOS:
 
  - First you need to install OpenSSL via Homebrew:
  
@@ -27,3 +48,25 @@ $ export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
 $ PYCURL_SSL_LIBRARY=openssl LDFLAGS="-L/usr/local/opt/openssl/lib" CPPFLAGS="-I/usr/local/opt/openssl/include" pip install --no-cache-dir pycurl
 ```
  - Finally, if we re-install or execute wfuzz again it should work correctly.
+ 
+# Running:
+
+In order to initialize the chat app, you will need to set a hidden service.
+
+To do that run:
+
+```bash
+python create_hidden_service.py
+```
+
+Now on the same machine running the hidden service run the message server:
+
+```bash
+python message_app.py
+```
+
+Now every machine that wants to join the chat just need to run the chat app and fill with the hidden service information:
+
+```bash
+python chat_app.py
+```
