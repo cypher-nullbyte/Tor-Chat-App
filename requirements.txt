@@ -4,7 +4,6 @@ Flask-SocketIO==4.1.0
 itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
-pycurl==7.43.0.3
 PySimpleGUI==4.0.0
 python-engineio==3.8.1
 python-socketio==4.1.0
