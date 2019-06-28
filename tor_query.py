@@ -42,4 +42,5 @@ class TorQuery:
             query.perform()
             return str(output.getvalue())[2:-1]
         except pycurl.error as exc:
+            print("Unable to reach %s (%s)" % (domain, exc))
             return "Unable to reach %s (%s)" % (domain, exc)
