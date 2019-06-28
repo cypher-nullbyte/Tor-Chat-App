@@ -11,7 +11,7 @@ class TorQuery:
         self.domain = domain
         self.socks_port = int(socks_port)
 
-    async def query(self, route=''):
+    def query(self, route=''):
         """
         Uses pycurl to fetch a site using the proxy on the socks_port
         :param url: the string url

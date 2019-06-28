@@ -20,7 +20,6 @@ def update_talk(talk):
     window.Element('_OUTPUT_').Update('\n'.join(talk_to_print))
 
 
-@asyncio.coroutine
 def send():
     # Update text
 
@@ -37,18 +36,13 @@ def send():
     talk = talk_string.split(LINE_B)
     update_talk(talk)
 
-    # return talk
 
-
-@asyncio.coroutine
 def update():
     print('update')
     talk_string = tor_query.query()
     print(talk_string)
     talk = talk_string.split(LINE_B)
     update_talk(talk)
-
-    # return talk
 
 
 if __name__ == '__main__':
@@ -69,17 +63,15 @@ if __name__ == '__main__':
 
     window = sg.Window('Tor Chat', layout)
     loop = asyncio.get_event_loop()
+    update()
+
     while True:
-        event, values = window.Read(timeout=500)
+        event, values = window.Read(timeout=6000)
         # print(event, values)
         if event == 'Send':
             send()
         elif event == '__TIMEOUT__':
-            try:
-                # update().send(datetime.datetime.now())
-                loop.run_until_complete(update())
-            except StopIteration as exe:
-                print('executed %s' % exe)
+            update()
         elif event is None or event == 'Exit':
             break
 
