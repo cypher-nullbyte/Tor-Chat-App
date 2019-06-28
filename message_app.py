@@ -1,9 +1,11 @@
 import datetime
 import PySimpleGUI as sg
 from tor_query import TorQuery
+from stem.control import Controller
 import asyncio
+import stem
 
-
+SOCKS_PORT = 9050
 SEP = '-$$-$$-'
 LINE_B = '-@@-@@-'
 
@@ -21,33 +23,40 @@ def update_talk(talk):
 
 
 def send():
-    # Update text
-
-    # time = str(datetime.datetime.now())
-    # talk.append(SEP.join([time, user, message]))
-    # update_talk(talk)
-
-    # Query post message
-
     message = values['_IN_']
     route = 'user/%s/message/%s' % (user, message)
     talk_string = tor_query.query(route)
-    print(talk_string)
     talk = talk_string.split(LINE_B)
     update_talk(talk)
 
 
 def update():
-    print('update')
     talk_string = tor_query.query()
-    print(talk_string)
     talk = talk_string.split(LINE_B)
     update_talk(talk)
 
 
 if __name__ == '__main__':
-    socks_port = int(input("Tor controller port: "))
+
+    try:
+        tor_process = stem.process.launch_tor_with_config(
+            config={
+                'SocksPort': str(SOCKS_PORT),
+            },
+        )
+    except:
+        print(' * Tor might be already running \n')
+
+    controller = Controller.from_port()
+    controller.authenticate()
+
+    # socks_port = int(input("Tor controller port: "))
+    socks_port = SOCKS_PORT
     hidden_service_id = input("hidden service id: ")
+    hidden_service_auth = input("hidden service authentication key: ")
+
+    controller.set_conf('HidServAuth', '%s.onion %s' % (hidden_service_id, hidden_service_auth))
+
     user = input("Your user: ")
 
     domain = hidden_service_id + '.onion'
@@ -56,8 +65,7 @@ if __name__ == '__main__':
 
     talk = []
     layout = [
-        # [sg.Text('', size=(15, 10), key='_OUTPUT_')],
-        [sg.Multiline('', size=(45, 10),key='_OUTPUT_')],
+        [sg.Multiline('', size=(45, 15), key='_OUTPUT_')],
         [sg.Input(do_not_clear=True, key='_IN_'), sg.Button('Send')]
     ]
 
@@ -67,7 +75,6 @@ if __name__ == '__main__':
 
     while True:
         event, values = window.Read(timeout=6000)
-        # print(event, values)
         if event == 'Send':
             send()
         elif event == '__TIMEOUT__':
