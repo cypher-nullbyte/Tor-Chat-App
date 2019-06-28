@@ -6,8 +6,8 @@ import urllib.parse
 SEP = '-$$-$$-'
 LINE_B = '-@@-@@-'
 
-line = '2019-06-27 23:48:47.678' + SEP + 'carl' + SEP + 'this is a message'
-talk = [line, line, line]
+# line = '2019-06-27 23:48:47.678' + SEP + 'carl' + SEP + 'this is a message'
+talk = []
 app = Flask(__name__)
 
 

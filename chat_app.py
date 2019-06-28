@@ -38,7 +38,7 @@ def update():
 
 if __name__ == '__main__':
 
-    SOCKS_PORT = int(input("Tor port: "))
+    # SOCKS_PORT = int(input("Tor port: "))
 
     try:
         tor_process = stem.process.launch_tor_with_config(
