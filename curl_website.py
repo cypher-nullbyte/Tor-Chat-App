@@ -56,8 +56,9 @@ tor_process = stem.process.launch_tor_with_config(
 )
 
 print(term.format("\nChecking our endpoint:\n", term.Attr.BOLD))
-print(term.format(query("ifconfig.co"), term.Color.BLUE))
+# print(term.format(query("ifconfig.co"), term.Color.BLUE))
 print(term.format(query("https://www.atagar.com/index.html"), term.Color.BLUE))
+# print(term.format(query("nw3m6k3454xtsacq4s5rhkgwcyhsmaqzfgh2n2hwx5ftrydnhkduxgad.onion"), term.Color.BLUE))
 
 tor_process.kill()
 
