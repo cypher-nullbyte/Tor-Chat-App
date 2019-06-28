@@ -1,5 +1,6 @@
 import io
 import pycurl
+import urllib.parse
 
 
 class TorQuery:
@@ -18,8 +19,16 @@ class TorQuery:
         :param route: the route in the website
         :return: the website string
         """
+        if route:
+            if route[0] == '/':
+                domain = self.domain + route
+            else:
+                domain = self.domain + '/' + route
+        else:
+            domain = self.domain
 
-        domain = self.domain + route
+        domain = urllib.parse.quote(domain)
+
         output = io.BytesIO()
 
         query = pycurl.Curl()
