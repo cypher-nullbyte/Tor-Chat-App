@@ -4,10 +4,14 @@ import pycurl
 
 class TorQuery:
     def __init__(self, domain, socks_port):
+        """
+        :param domain: the domain you will want to query
+        :param socks_port: the port where tor controller is listening
+        """
         self.domain = domain
-        self.socks_port = socks_port
+        self.socks_port = int(socks_port)
 
-    def query(self, route):
+    async def query(self, route=''):
         """
         Uses pycurl to fetch a site using the proxy on the socks_port
         :param url: the string url
@@ -27,6 +31,6 @@ class TorQuery:
 
         try:
             query.perform()
-            return output.getvalue()
+            return str(output.getvalue())[2:-1]
         except pycurl.error as exc:
             return "Unable to reach %s (%s)" % (domain, exc)
