@@ -6,7 +6,7 @@ import stem.process
 from stem.util import term
 
 
-SOCKS_PORT = 7000
+SOCKS_PORT = 9050
 
 
 def query(url):
@@ -27,7 +27,7 @@ def query(url):
 
     try:
         query.perform()
-        return output.getvalue()
+        return str(output.getvalue())
     except pycurl.error as exc:
         return "Unable to reach %s (%s)" % (url, exc)
 
@@ -44,21 +44,21 @@ def print_bootstrap_lines(line):
         print(term.format(line, term.Color.BLUE))
 
 
-print(term.format("Starting Tor: n", term.Attr.BOLD))
+# print(term.format("Starting Tor: n", term.Attr.BOLD))
+#
+#
+# tor_process = stem.process.launch_tor_with_config(
+#     config={
+#         'SocksPort': str(SOCKS_PORT),
+#         'ExitNodes': '{ru}',
+#     },
+#     init_msg_handler=print_bootstrap_lines,
+# )
 
-
-tor_process = stem.process.launch_tor_with_config(
-    config={
-        'SocksPort': str(SOCKS_PORT),
-        'ExitNodes': '{ru}',
-    },
-    init_msg_handler=print_bootstrap_lines,
-)
-
-print(term.format("\nChecking our endpoint:\n", term.Attr.BOLD))
+# print(term.format("\nChecking our endpoint:\n", term.Attr.BOLD))
 # print(term.format(query("ifconfig.co"), term.Color.BLUE))
-print(term.format(query("https://www.atagar.com/index.html"), term.Color.BLUE))
+print(term.format(query("6fttsbfvhkan5bw4.onion"), term.Color.BLUE))
 # print(term.format(query("nw3m6k3454xtsacq4s5rhkgwcyhsmaqzfgh2n2hwx5ftrydnhkduxgad.onion"), term.Color.BLUE))
 
-tor_process.kill()
+# tor_process.kill()
 
