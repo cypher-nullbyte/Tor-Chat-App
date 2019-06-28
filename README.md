@@ -16,14 +16,16 @@ Install requirements:
 pip install -r requirements.txt
 ```
 
-## pycurl installation
-
- - pycurl has some installations issues, here some workarounds:
-
 ### Install pycurl on ubuntu:
 
 ```bash
-sudo apt install python-pycurl
+sudo apt install python3-pycurl
+```
+
+### Install tkinter on ubuntu:
+
+```bash
+sudo apt-get install python3-tk 
 ```
 
 ### Install pycurl on MacOS:
@@ -50,10 +52,44 @@ $ export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
 ```bash
 $ PYCURL_SSL_LIBRARY=openssl LDFLAGS="-L/usr/local/opt/openssl/lib" CPPFLAGS="-I/usr/local/opt/openssl/include" pip install --no-cache-dir pycurl
 ```
+
+## Install tor:
+
+### Mac
+
+```bash
+brew install tor
+```
+
+### Ubuntu 
+
+```bash
+sudo apt-get install tor
+```
+
+### Configure the file torrc
+
+On mac you might find it on '/usr/local/etc/tor/torrc', and on ubuntu '/etc/tor/torrc'.
+Insert these lines on the file:
+
+```
+ControlPort 9051
+
+CookieAuthentication 1
+
+HashedControlPassword 16:E600ADC1B52C80BB6022A0E999A7734571A451EB6AE50FED489B72E3DF
+```
+ 
  
 # Running:
 
-In order to initialize the chat app, you will need to set a hidden service.
+### Initiate Tor:
+
+```bash
+tor
+```
+
+#### In order to initialize the chat app, you will need to set a hidden service.
 
 To do that run:
 
@@ -61,13 +97,13 @@ To do that run:
 python create_hidden_service.py
 ```
 
-Now on the same machine running the hidden service run the message server:
+#### Now on the same machine running the hidden service run the message server:
 
 ```bash
 python message_server.py
 ```
 
-Now every machine that wants to join the chat just need to run the chat app and fill with the hidden service information:
+#### Now every machine that wants to join the chat just need to run the chat app and fill with the hidden service information:
 
 ```bash
 python chat_app.py
