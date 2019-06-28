@@ -29,7 +29,8 @@ print(' * Initiating a new hidden service')
 hidden_service = controller.create_ephemeral_hidden_service(
     {80: 5000},
     await_publication=True,
-    basic_auth={'user': None}
+    basic_auth={'user': None},
+    detached=True
 )
 
 print(' * Hidden service initialized with id %s' % hidden_service.service_id)
