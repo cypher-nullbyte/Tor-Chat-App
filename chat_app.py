@@ -38,6 +38,8 @@ def update():
 
 if __name__ == '__main__':
 
+    SOCKS_PORT = int(input("Tor port: "))
+
     try:
         tor_process = stem.process.launch_tor_with_config(
             config={
@@ -50,7 +52,6 @@ if __name__ == '__main__':
     controller = Controller.from_port()
     controller.authenticate()
 
-    # socks_port = int(input("Tor controller port: "))
     socks_port = SOCKS_PORT
     hidden_service_id = input("hidden service id: ")
     hidden_service_auth = input("hidden service authentication key: ")
