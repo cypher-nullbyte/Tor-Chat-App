@@ -85,9 +85,17 @@ HashedControlPassword 16:E600ADC1B52C80BB6022A0E999A7734571A451EB6AE50FED489B72E
 
 ### Initiate Tor:
 
+Kill any previously existing Tor instance:
+```bash
+sudo killall tor
+```
+
+Initiate tor:
 ```bash
 tor
 ```
+
+### On server side:
 
 #### In order to initialize the chat app, you will need to set a hidden service.
 
@@ -102,6 +110,8 @@ python create_hidden_service.py
 ```bash
 python message_server.py
 ```
+
+### On client side:
 
 #### Now every machine that wants to join the chat just need to run the chat app and fill with the hidden service information:
 
