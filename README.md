@@ -1,4 +1,8 @@
-# Tor App
+# Tor Chat Application
+
+A simple application that allows safe and private communication between a group of individuals through the Tor network.
+
+The usage is simple clone this repository on the client and server machine. Then follow the Setup instruction:
 
 # Setup
 
