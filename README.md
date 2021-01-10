@@ -4,6 +4,14 @@ A simple application that allows safe and private communication between a group 
 
 The usage is simple clone this repository on the client and server machine. Then follow the Setup instruction:
 
+# Usage
+
+Watch the following youtube video with the tutorial on how to use the Tor Chat app:
+
+[![Video Tutorial](https://i9.ytimg.com/vi/mcoticbMe_Q/mqdefault.jpg?time=1610307600000&sqp=CJCw7f8F&rs=AOn4CLDEG_f42KJ0AdfmILWpAf8F1mpYhA)](https://www.youtube.com/watch?v=mcoticbMe_Q)
+
+Or access https://www.youtube.com/watch?v=mcoticbMe_Q
+
 # Setup
 
 ## Requirements:
